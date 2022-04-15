@@ -3,8 +3,13 @@ import { Router } from "express";
 
 const router =  Router()
 
-router.get("/characters" , (req  , res) => {
-    //Return list of all characters
+
+
+
+router.get("/movies" , (req  , res) => {
+    //Return list of all movie 
+    // Image, title  y creation date.
+
     let response  = " Return list of all characters"
     console.log(  "Requ : ", req.query);
     if (Object.keys(req.query).length !== 0){
@@ -20,27 +25,30 @@ router.get("/characters" , (req  , res) => {
     res.send(response);
 })
 
-router.get("/characters/:characterId" , (req  , res) => {
-    // details of particular character
+router.get("/movies/:userId" , (req  , res) => {
+    // details of movie and characters
+    res.send();
+})
+
+router.post("/movies" ,  (req  , res) => {
+    //Create movie
+    res.send();
+})
+
+router.put("/movies/:userId" ,  (req  , res) => {
+    //Update movie
+    res.send();
+})
+
+router.delete("/movies/:userId" ,  (req  , res) => {
+    //Delete movie
     res.send();
 })
 
 
-router.post("/characters" ,  (req  , res) => {
-    //Create character
-    res.send();
-})
 
 
-router.put("/characters/:characterId" ,  (req  , res) => {
-    //Update character
-    res.send();
-})
 
-router.delete("/characters/:characterId" ,  (req  , res) => {
-    //Delete character
-    res.send();
-})
 
 
 export default router
