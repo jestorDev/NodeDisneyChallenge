@@ -60,12 +60,44 @@ export const getDetailsMovie = (movieId) => {
 
 export const createMovie = (movie) => {
     console.log(movie);
+
     // details of movie and characters
+
+
+
+    const newMovie = await db.models.Movie.create(movie)
+
+    if (movie.characters) {
+        movie.characters.forEach(characterId => {
+            db.models.CharacterMovies.create(
+                {
+                    "MovieID": newMovie.ID,
+                    "CharacterID": characterId
+                },
+            )
+        });
+    }
+
+    if (movie.genres) {
+        movie.genres.forEach(genreID => {
+            db.models.MovieGenres.create(
+                {
+                    "MovieID" : newMovie.ID,
+                    "GenreID" : genreID
+                },
+            )
+        });
+    }
+
     return "+++++++++create++++++++++" + JSON.stringify(movie)
 }
 
 export const updateMovie = (id, movie) => {
     // details of movie and characters
+
+    const actual = await db.models.Movie.findOne({ where: { ID: id } })
+    await actual.update(movie);
+
 
     return "+++++++++UPDating++++++++++ " + id + " +++++++++++" + JSON.stringify(movie)
 }
