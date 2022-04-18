@@ -1,14 +1,55 @@
+import db from "../models/init.mjs";
+
+
+
+let getMovieByName = (name) => {
+    return db.models.Movie.findAll({
+        where: { title: name }
+    });
+}
+
+let getMovieByGenre = (genre) => {
+    return db.models.Movie.findAll({
+        where: { title: genre }
+    });
+}
+
+let getMoviesInOrder = (order) => {
+    if (order === "DESC")
+        return db.models.Movie.findAll({
+            order: [
+                ['ID', 'DESC'],
+            ]
+        });
+    return db.models.Movie.findAll({
+        order: [
+            ['ID', 'ASC'],
+        ]
+    });
+}
+
 
 
 export const getMovies = (searchParams) => {
-    //Return list of all movie 
-    // Image, title  y creation date.
 
-    if (Object.keys(searchParams).length === 0) 
-        return " Im going to list all movies in low detail"
-    
+    if (Object.keys(searchParams).length === 0) {
+        return db.models.Movie.findAll({
+            attributes: ['image', 'title', "createdAt"],
+        });
+    }
+
     let filter = Object.keys(searchParams)[0]
-    return " Searching by : " + filter + " with value " + searchParams[filter]
+    switch (filter) {
+        case "name":
+            return getMovieByName(searchParams[filter])
+        case "genre":
+            return getMovieByGenre(searchParams[filter])
+        case "order":
+            return getMoviesInOrder(searchParams[filter])
+        default:
+            return {}
+    }
+
 }
 
 
@@ -20,13 +61,13 @@ export const getDetailsMovie = (movieId) => {
 export const createMovie = (movie) => {
     console.log(movie);
     // details of movie and characters
-    return   "+++++++++create++++++++++" + JSON.stringify(movie)
+    return "+++++++++create++++++++++" + JSON.stringify(movie)
 }
 
 export const updateMovie = (id, movie) => {
     // details of movie and characters
 
-    return  "+++++++++UPDating++++++++++ " + id +" +++++++++++" +  JSON.stringify(movie)
+    return "+++++++++UPDating++++++++++ " + id + " +++++++++++" + JSON.stringify(movie)
 }
 export const deleteMovie = (id) => {
     return " Delete movie with id  :" + id;
