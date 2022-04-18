@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 
+
 import { getCharacters,
     getDetailsCharacter,
     createCharacter,
@@ -9,20 +10,18 @@ import { getCharacters,
 
 const router =  Router()
 
-router.get("/characters" , (req  , res) => {
-
-    res.send(getCharacters(req.query));
+router.get("/characters" , async (req  , res) => {
+    res.send(await getCharacters(req.query));
 })
 
-router.get("/characters/:characterId" , (req  , res) => {
+router.get("/characters/:characterId" ,async (req  , res) => {
     // details of particular character
     res.send(
         getDetailsCharacter(req.params.characterId)
     );
 })
 
-
-router.post("/characters" ,  (req  , res) => {
+router.post("/characters" , async (req  , res) => {
     //Create character
     res.send(
         createCharacter(req.body)
@@ -30,16 +29,15 @@ router.post("/characters" ,  (req  , res) => {
 })
 
 
-router.put("/characters/:characterId" ,  (req  , res) => {
+router.put("/characters/:characterId" , async (req  , res) => {
     //Update character
     res.send(
         updateCharacter(req.params.characterId, req.body)
     );
 })
 
-router.delete("/characters/:characterId" ,  (req  , res) => {
+router.delete("/characters/:characterId" , async (req  , res) => {
     //Delete character
-
     res.send(deleteCharacter(req.params.characterId));
 })
 

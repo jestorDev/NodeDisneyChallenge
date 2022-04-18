@@ -9,32 +9,31 @@ import  {
 } from "../controllers/movie.controller.mjs";
 
 
+
+
 const router = Router()
 
-router.get("/movies", (req, res) => {
-    res.send(getMovies(req.query));
+router.get("/movies", async (req, res) => {
+    res.send(await getMovies(req.query));
 })
 
-router.get("/movies/:movieId", (req, res) => {
-    res.send(getDetailsMovie(req.params.movieId));
+router.get("/movies/:movieId", async (req, res) => {
+    res.send(await getDetailsMovie(req.params.movieId));
 })
 
-router.post("/movies", (req, res) => {
+router.post("/movies", async(req, res) => {
     //Create 
-    
-    res.send(createMovie(req.body));
+    res.send( await createMovie(req.body));
 })
 
-router.put("/movies/:movieId", (req, res) => {
+router.put("/movies/:movieId", async(req, res) => {
     //Update movie
-    
-    res.send(updateMovie(req.params.movieId ,req.body));
+    res.send( await updateMovie(req.params.movieId ,req.body));
 })
 
-router.delete("/movies/:movieId", (req, res) => {
+router.delete("/movies/:movieId", async(req, res) => {
     //Delete movie
-    res.send(deleteMovie(req.params.movieId ))
-    
+    res.send( await deleteMovie(req.params.movieId ))
 })
 
 export default router

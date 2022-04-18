@@ -14,7 +14,7 @@ constructors.forEach(seqModel => {
 });
 
 
-await sequelize.sync({ force: true });
+await sequelize.sync();
 
 
 console.log("-----Completed Table creations ------- ");
@@ -30,7 +30,9 @@ models.Character.belongsToMany(models.Movie, { through: 'CharacterMovies' });
 console.log("-----Completed Table asociations ------- ");
 
 
-await sequelize.sync({ force: true });
+
+
+await sequelize.sync();
 console.log("-----Completed INIT------- ");
 export default sequelize
 

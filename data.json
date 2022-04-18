@@ -137,6 +137,14 @@
         {
             "MovieID" : 3,
             "CharacterID" :4
+        },
+        {
+            "MovieID" : 4,
+            "CharacterID" :3
+        },
+        {
+            "MovieID" : 4,
+            "CharacterID" :4
         }
     
         
