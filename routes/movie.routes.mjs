@@ -1,39 +1,25 @@
 import { Router } from "express";
 
 import  {
-    getMovies,
-    getDetailsMovie, 
-    createMovie,
-    updateMovie,
-    deleteMovie
-} from "../controllers/movie.controller.mjs";
+    moviesGet,
+    moviesGetbyId,
+    moviesPostCreate,
+    moviesPutUpdate,
+    moviesDelete} from "../controllers/movie.controller.mjs";
 
 
 
 
 const router = Router()
 
-router.get("/movies", async (req, res) => {
-    res.send(await getMovies(req.query));
-})
+router.get("/movies",moviesGet)
 
-router.get("/movies/:movieId", async (req, res) => {
-    res.send(await getDetailsMovie(req.params.movieId));
-})
+router.get("/movies/:movieId", moviesGetbyId)
 
-router.post("/movies", async(req, res) => {
-    //Create 
-    res.send( await createMovie(req.body));
-})
+router.post("/movies", moviesPostCreate )
 
-router.put("/movies/:movieId", async(req, res) => {
-    //Update movie
-    res.send( await updateMovie(req.params.movieId ,req.body));
-})
+router.put("/movies/:movieId", moviesPutUpdate)
 
-router.delete("/movies/:movieId", async(req, res) => {
-    //Delete movie
-    res.send( await deleteMovie(req.params.movieId ))
-})
+router.delete("/movies/:movieId", moviesDelete)
 
 export default router

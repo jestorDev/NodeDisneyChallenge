@@ -1,45 +1,23 @@
 import { Router } from "express";
 
-
-
-import { getCharacters,
-    getDetailsCharacter,
-    createCharacter,
-    updateCharacter,
-    deleteCharacter } from "../controllers/character.controller.mjs";
+import { charactersGet,
+    charactersGetbyId,
+    charactersPostCreate,
+    charactersPutUpdate,
+    characterDelete } from "../controllers/character.controller.mjs";
 
 const router =  Router()
 
-router.get("/characters" , async (req  , res) => {
-    res.send(await getCharacters(req.query));
-})
+router.get("/characters" , charactersGet)
 
-router.get("/characters/:characterId" ,async (req  , res) => {
-    // details of particular character
-    res.send(
-        getDetailsCharacter(req.params.characterId)
-    );
-})
+router.get("/characters/:characterId" , charactersGetbyId)
 
-router.post("/characters" , async (req  , res) => {
-    //Create character
-    res.send(
-        createCharacter(req.body)
-    );
-})
+router.post("/characters" , charactersPostCreate )
 
 
-router.put("/characters/:characterId" , async (req  , res) => {
-    //Update character
-    res.send(
-        updateCharacter(req.params.characterId, req.body)
-    );
-})
+router.put("/characters/:characterId" , charactersPutUpdate)
 
-router.delete("/characters/:characterId" , async (req  , res) => {
-    //Delete character
-    res.send(deleteCharacter(req.params.characterId));
-})
+router.delete("/characters/:characterId" ,characterDelete )
 
 
 export default router

@@ -1,13 +1,14 @@
 import { Router } from "express";
 
-import { 
+import {
     loginPostAccess,
-    registerPostCreate,
-    authForm
-     } from "../controllers/user.controller.mjs";
+    registerPostCreate
+} from "../controllers/user.controller.mjs";
 
 
-router.post("/auth/login" , registerPostCreate )
-router.post("/auth/register" , loginPostAccess )
+const router = Router()
+
+router.post("/auth/login", registerPostCreate)
+router.post("/auth/register", loginPostAccess)
 
 export default router

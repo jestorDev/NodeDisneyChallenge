@@ -1,6 +1,37 @@
 import db from "../models/init.mjs";
 
 
+////////////////////////////////////////////////////
+
+
+
+export const moviesGet =  async (req, res) => {
+    res.send(await getMovies(req.query));
+}
+
+export const moviesGetbyId =  async (req, res) => {
+    res.send(await getDetailsMovie(req.params.movieId));
+}
+
+export const moviesPostCreate = async(req, res) => {
+    //Create 
+    res.send( await createMovie(req.body));
+}
+
+
+export const moviesPutUpdate= async(req, res) => {
+    //Update movie
+    res.send( await updateMovie(req.params.movieId ,req.body));
+}
+
+export const moviesDelete =async(req, res) => {
+    //Delete movie
+    res.send( await deleteMovie(req.params.movieId ))
+}
+
+
+////////////////////////////////////////////////////
+
 
 let getMovieByName = (name) => {
     return db.models.Movie.findAll({
@@ -58,7 +89,7 @@ export const getDetailsMovie = (movieId) => {
     return " Movie by id : " + movieId
 }
 
-export const createMovie = (movie) => {
+export const createMovie = async (movie) => {
     console.log(movie);
 
     // details of movie and characters
@@ -92,7 +123,7 @@ export const createMovie = (movie) => {
     return "+++++++++create++++++++++" + JSON.stringify(movie)
 }
 
-export const updateMovie = (id, movie) => {
+export const updateMovie = async (id, movie) => {
     // details of movie and characters
 
     const actual = await db.models.Movie.findOne({ where: { ID: id } })

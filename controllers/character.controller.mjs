@@ -1,15 +1,59 @@
 
 import db from "../models/init.mjs";
 
-export const getCharacters = (searchParams) => {
+
+
+/////////////////Endpoint request handlers//////////////////////////////////////////
+
+
+export const charactersGet = async (req  , res) => {
+    
+    let  characters = {}
+   
+    if (Object.keys(req.query).length === 0){
+        characters = db.models.Character.findAll({
+            attributes: ['image', 'name', 'ID'],
+        });
+        res.status(200).send(await characters);
+    }
+    
+}
+
+export const charactersGetbyId= async (req  , res) => {
+    // details of particular character
+    res.send(
+        getDetailsCharacter(req.params.characterId)
+    );
+}
+
+export const charactersPostCreate =async (req  , res) => {
+    //Create character
+    res.send(
+        createCharacter(req.body)
+    );
+}
+
+export const charactersPutUpdate= async (req  , res) => {
+    //Update character
+    res.send(
+        updateCharacter(req.params.characterId, req.body)
+    );
+}
+
+export const characterDelete = async (req  , res) => {
+    //Delete character
+    res.send(deleteCharacter(req.params.characterId));
+}
+
+
+///////////////////////////////////////////////////////////
+
+
+const getCharacters = (searchParams) => {
     //Return list of all Character 
     // Image, title  y creation date.
-
-
     if (Object.keys(searchParams).length === 0)
-        return db.models.Character.findAll({
-            attributes: ['image', 'name'],
-        });
+        return 
 
     let filter = Object.keys(searchParams)[0]
 
@@ -21,12 +65,12 @@ export const getCharacters = (searchParams) => {
         case "movie":
             return getMoviesInOrder(searchParams[filter])
         default:
-            return {}
+            return {msj :  "Incorrect search params"}
     }
 }
 
 
-export const getDetailsCharacter = async (CharacterId) => {
+const getDetailsCharacter = async (CharacterId) => {
 
     let chara = await db.models.Character.findOne({
         where: { ID: CharacterId },
@@ -38,7 +82,7 @@ export const getDetailsCharacter = async (CharacterId) => {
     return " Character by id : " + CharacterId
 }
 
-export const createCharacter = async (Character) => {
+const createCharacter = async (Character) => {
 
     /*
     {
@@ -65,14 +109,14 @@ export const createCharacter = async (Character) => {
     return "Finished?"
 }
 
-export const updateCharacter = async (id, Character) => {
+const updateCharacter = async (id, Character) => {
 
     const actual = await db.models.Character.findOne({ where: { ID: id } })
     await actual.update(Character);
 
     return "+++++++++UPDating++++++++++ " + id + " +++++++++++" + JSON.stringify(Character)
 }
-export const deleteCharacter = async(id) => {
+const deleteCharacter = async(id) => {
 
     const actual = await db.models.Character.findOne({ where: { ID: id } })
     await actual.destroy();
