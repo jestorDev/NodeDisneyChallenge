@@ -2,10 +2,11 @@
 import Character from "./character.mjs";
 import Movie from "./movie.mjs";
 import Genre from "./genre.mjs";
+import User from "./user.mjs";
 
 import sequelize from "./db.mjs";
 
-let constructors = [Character, Movie, Genre]
+let constructors = [Character, Movie, Genre , User]
 let models = sequelize.models
 
 
