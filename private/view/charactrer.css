@@ -1,0 +1,7 @@
+td {
+    font-size: large;
+    text-align: center;
+}
+img {
+    object-fit: cover;  width:70px;height:70px;
+}

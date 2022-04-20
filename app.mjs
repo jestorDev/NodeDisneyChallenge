@@ -3,7 +3,7 @@ import express from "express";
 import characterRouter from "./routes/character.routes.mjs"
 import moviesRouter from "./routes/movie.routes.mjs";
 import authRouter from "./routes/auth.routes.mjs";
-import viewRouter from "./routes/view.routes.mjs";
+
 
 import path from "path";
 
@@ -30,16 +30,12 @@ function isLoggedIn( req, res, next ) {
    next();
 }
 
-app.use( isLoggedIn, express.static( path.join( __dirname, 'private' ) ) );
-
-app.use( express.static( path.join( __dirname, 'anonymous' ) ) );
-
 app.use(express.static(path.join(__dirname, 'public'),{extensions:['html']}));
+app.use( isLoggedIn, express.static( path.join( __dirname, 'private' ) ) );
 
 app.use(characterRouter)
 app.use(moviesRouter)
 app.use(authRouter)
-app.use(viewRouter)
 
 
 export default app
