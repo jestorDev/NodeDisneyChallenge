@@ -3,5 +3,5 @@ td {
     text-align: center;
 }
 img {
-    object-fit: cover;  width:70px;height:70px;
+    object-fit: cover;  width:70px;height:100px;
 }
