@@ -26,12 +26,12 @@ app.use(express.json());
 
 
 function isLoggedIn( req, res, next ) {
-   console.log("trying restricted file");
+   console.log("--------Accesing restricted route--------");
    next();
 }
 
 app.use(express.static(path.join(__dirname, 'public'),{extensions:['html']}));
-app.use( isLoggedIn, express.static( path.join( __dirname, 'private' ) ) );
+app.use( isLoggedIn, express.static( path.join( __dirname, 'private' ),{extensions:['html']} ) );
 
 app.use(characterRouter)
 app.use(moviesRouter)

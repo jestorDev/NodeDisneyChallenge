@@ -65,7 +65,7 @@ export const getMovies = (searchParams) => {
 
     if (Object.keys(searchParams).length === 0) {
         return db.models.Movie.findAll({
-            attributes: ['image', 'title', "createdAt"],
+            attributes: [ 'ID', 'image', 'title', "createdAt"],
         });
     }
 
