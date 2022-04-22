@@ -77,6 +77,25 @@ function   deleteCharacter(id){
 console.log("Going to    deleteCharacter id : " , id);
 }
 
+function detailsComponent(character) {
+
+    return `<tr id="details-${character.ID}" > 
+    <td  colspan="5" style = "text-align:  left;">   
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Name: ${character.name}</h6>
+        </div>
+        <div class="card-body">
+        <div>age:<br> ${character.age}</div>
+        <div>weitgh:<br> ${character.weitgh}</div>
+        <div>history:<br> ${character.history}</div>
+        <div> movies:<br>  ${movieListComponent(character.movies)}</div>
+        </div></div>
+    </td>
+    </tr>`
+}
+
+
 function movieListComponent(moviesList) {
     let moviesListComp= ""
     moviesList.forEach(
@@ -108,24 +127,6 @@ function movieCardComponent(movie) {
 }
 
 
-function detailsComponent(character) {
-
-    return `<tr id="details-${character.ID}" > 
-    <td style = "text-align:  left;">   
-    <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Name: ${character.name}</h6>
-                                </div>
-                                <div class="card-body">
-                                <div>age:<br> ${character.age}</div>
-                                <div>weitgh:<br> ${character.weitgh}</div>
-                                <div>history:<br> ${character.history}</div>
-                                <div> movies:<br>  ${movieListComponent(character.movies)}</div>
-                                </div>
-                </div>
-    </td>
-    </tr>`
-}
 
 function getDetails(id) {
     console.log("Details of id : " , id);
