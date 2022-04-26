@@ -33,6 +33,47 @@ const lilostich = {
 }
 
 
+
+
+function noLoginComponent() {
+    return `<tr  id="login-row">
+    <td colspan="5">
+    <div><h2>Login to get access</h2></div>
+    <div>
+    <a href="/login" class="m-2 btn btn-primary btn-block btn-lg">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">Log in</span>
+    </a>
+</div>
+<div>
+    <a href="/register" class="m-2 btn btn-primary btn-block btn-lg">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">Register</span>
+    </a>
+</div>
+
+    </td>
+    </tr>
+    `
+}
+
+function logoutBtn(params) {
+    let btn  = document.getElementById("logout")
+    btn.onclick = ()=>{
+        localStorage.clear();
+        document.location.href = "/";
+    }
+}
+
+logoutBtn()
+
+
+
+
 function characterListComponent(elemsList) {
     let elemsListComp= ""
     elemsList.forEach(
@@ -115,11 +156,25 @@ function rowMovieComponent(movie) {
 
 async function getMovies() {
 
+    let accessToken =  localStorage.getItem("token")
+    if (!accessToken){
+        let list = document.getElementById("list")
+        list.innerHTML = noLoginComponent()
+        let createbtn =  document.getElementById("create--1")
+        createbtn.classList.add("d-none");
+        return
+    }
+
+
+
+
     let response = await fetch('/movies');
     console.log(response.status); // 200
     console.log(response.statusText); // OK
 
     if (response.status === 200) {
+
+        
         var movies = await response.json()
 
         console.log(movies[0]);

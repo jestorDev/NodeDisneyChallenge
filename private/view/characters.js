@@ -1,13 +1,12 @@
 
 
-
 const simba={
     "ID" : 2,
     "name": "Simba",
     "image": "https://static.wikia.nocookie.net/disney/images/3/37/Profile_-_Simba.jpeg",
     "age": 18,
     "weitgh": 200,
-    "history": " Simba is the protagonist of Disney's 1994 animated feature film, The Lion King. He is the son of Mufasa and Sarabi, who was destined to rule the Pride Lands, as king. When Mufasa was murdered by his treacherous brother, Scar, Simba was exiled from the Pride Lands after his uncle tricked him into taking the blame for his father's death. He finds refuge in a jungle oasis with Timon and Pumbaa who raise him as his adoptive fathers, but when the Pride Lands fall to disarray during his absence. With the kingdom in peril, Simba is forced to confront his troubled past and take his place in the \"Circle of Life\". ",
+    "history": " Simba is the proptagonist of Disney's 1994 animated feature film, The Lion King. He is the son of Mufasa and Sarabi, who was destined to rule the Pride Lands, as king. When Mufasa was murdered by his treacherous brother, Scar, Simba was exiled from the Pride Lands after his uncle tricked him into taking the blame for his father's death. He finds refuge in a jungle oasis with Timon and Pumbaa who raise him as his adoptive fathers, but when the Pride Lands fall to disarray during his absence. With the kingdom in peril, Simba is forced to confront his troubled past and take his place in the \"Circle of Life\". ",
     "movies":[
         {
             "title": "The Lion King",
@@ -24,6 +23,14 @@ const simba={
     ]
 }
 
+function logoutBtn(params) {
+    let btn  = document.getElementById("logout")
+    btn.onclick = ()=>{
+        localStorage.clear();
+        document.location.href = "/";
+    }
+}
+logoutBtn()
 
 function rowCharacterComponent(character) {
     return `<tr id="row-${character.ID}">
@@ -43,8 +50,44 @@ function rowCharacterComponent(character) {
 `
 }
 
+function noLoginComponent() {
+    return `<tr  id="login-row">
+    <td colspan="5">
+    <div><h2>Login to get access</h2></div>
+    <div>
+    <a href="/login" class="m-2 btn btn-primary btn-block btn-lg">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">Log in</span>
+    </a>
+</div>
+<div>
+    <a href="/register" class="m-2 btn btn-primary btn-block btn-lg">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">Register</span>
+    </a>
+</div>
+
+    </td>
+    </tr>
+    `
+}
+
 
 async function getCharacters() {
+    let accessToken =  localStorage.getItem("token")
+    if (!accessToken){
+        let list = document.getElementById("list")
+        list.innerHTML = noLoginComponent()
+        let createbtn =  document.getElementById("create--1")
+        createbtn.classList.add("d-none");
+
+        return
+    }
+    
     let response = await fetch('/characters');
     console.log(response.status); // 200
     console.log(response.statusText); // OK
@@ -57,7 +100,7 @@ async function getCharacters() {
         characters.forEach(character=> {            
             table +=rowCharacterComponent(character);
         });
-
+        
         respo = characters
         list.innerHTML = table
     }
@@ -89,7 +132,7 @@ function detailsComponent(character) {
         <div>age:<br> ${character.age}</div>
         <div>weitgh:<br> ${character.weitgh}</div>
         <div>history:<br> ${character.history}</div>
-        <div> movies:<br>  ${movieListComponent(character.movies)}</div>
+        <div> movies:<br>  ${movieListComponent(character.Movies)}</div>
         </div></div>
     </td>
     </tr>`
@@ -127,14 +170,22 @@ function movieCardComponent(movie) {
 }
 
 
+async function  getCharacterDetails(id) {
+    let charuri = '/characters/' + id.toString()
+    console.log("Getiitng -----------" , charuri);
+    return await fetch(charuri);       
+}
 
-function getDetails(id) {
+
+async function  getDetails(id) {
     console.log("Details of id : " , id);
     
     let characterID  = id.substring(8)
-    console.log(simba);
     let actualRow=  document.getElementById("row-"+characterID)
-    actualRow.insertAdjacentHTML( "afterend", detailsComponent(simba))
+
+    let actualDetails =await (await getCharacterDetails(characterID)).json()
+    console.log( "Details -------------------------", actualDetails);
+    actualRow.insertAdjacentHTML( "afterend",  detailsComponent(actualDetails))
 }
 
 
@@ -155,7 +206,7 @@ function modalCreateEventListen(params) {
             document.getElementById("form-character-age").value =  characterData.age
             document.getElementById("form-character-weigth").value =  characterData.weitgh
             document.getElementById("form-character-history").value =  characterData.history
-            document.getElementById("form-character-movies").value = characterData["movies"].map(movie=>movie.title).toString()
+            document.getElementById("form-character-movies").value = characterData["Movies"].map(movie=>movie.title).toString()
         } 
         else{
             document.getElementById("exampleModalLabel").textContent= "New Character"
