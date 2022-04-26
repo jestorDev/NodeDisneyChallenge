@@ -8,7 +8,7 @@ import {
 
 const router = Router()
 
-router.post("/auth/login", registerPostCreate)
-router.post("/auth/register", loginPostAccess)
+router.post("/auth/login",  loginPostAccess)
+router.post("/auth/register",registerPostCreate)
 
 export default router
