@@ -23,21 +23,21 @@
         },
         {
             "name": "Scar",
-            "image": "https://static.wikia.nocookie.net/disney/images/6/66/Profile_-_Scar.jpe",
+            "image": "https://static.wikia.nocookie.net/disney/images/6/66/Profile_-_Scar.jpeg",
             "age": 50,
             "weitgh": 150,
             "history": "Scar is the main antagonist of Disney's 1994 animated feature film, The Lion King. As the brother of Mufasa and second-born prince of the Pride Lands, Scar was next in line to assume the throne as king. However, his chances were lost at the birth of his nephew, Simba. This embittered Scar with jealousy and a sense of entitlement, prompting him to develop a regicidal plot to take over the kingdom, with the aid of his hyena henchmen."
         },
         {
             "name": "Belle",
-            "image": "https://static.wikia.nocookie.net/disney/images/1/1b/Profile_-_Belle.jp",
+            "image": "https://static.wikia.nocookie.net/disney/images/1/1b/Profile_-_Belle.jpeg",
             "age": 19,
             "weitgh": 60,
             "history": "Belle is the female protagonist of Disney's 1991 animated feature film, Beauty and the Beast. She is the only daughter of Maurice, an inventor with whom she resides in a small, French village. The townsfolk labeled Belle an outcast because of her free spirit. She is also a proud bibliophile, her favorite genres being fantasy and adventure. Belle's passion for fantastical stories, coupled with her outcast status, left her yearning for a life of adventure outside her small village. She unexpectedly gets her wish when she becomes the Beast's prisoner in order to save her father's life. "
         },
         {
             "name": "Beast",
-            "image": "https://static.wikia.nocookie.net/disney/images/8/84/Profile_-_Beast.jp",
+            "image": "https://static.wikia.nocookie.net/disney/images/8/84/Profile_-_Beast.jpeg",
             "age": 21,
             "weitgh": 90,
             "history": " The Beast is the male protagonist of Disney's 1991 animated feature film Beauty and the Beast. A prince by birth, he was cursed into becoming a monster by a mysterious Enchantress as punishment for his selfish and cruel manners. Only loving another and earning their love in return can free the Beast and those affected by the spell before time runs out. "
@@ -46,40 +46,40 @@
     "genreArr": [
         {
             "name": "Action",
-            "image": "https://s1.eestatic.com/2020/06/10/series/cine/netflix-peliculas-cine_496711655_153519932_1706x960.jpg"
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/USMC-15679.jpg/1599px-USMC-15679.jpg"
         },
         {
             "name": "Drama",
-            "image": "https://media.glamour.com/photos/5ec2e904af30542b4c66c451/master/w_3000,h_1621,c_limit/MCDLIWO_CO010.jpg"
+            "image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Gone_With_The_Wind_1967_re-release.jpg"
         },
         {
             "name": "Romance",
-            "image": "https://media.glamour.com/photos/5ec2e904af30542b4c66c451/master/w_3000,h_1621,c_limit/MCDLIWO_CO010.jpg"
+            "image": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Tyrone_power_alice_faye_ragtime6.jpg"
         }
 
     ],
     "movieArr": [
         {
             "title": "Beauty and the Beast",
-            "image": "https://static.wikia.nocookie.net/disney/images/0/0b/Beauty_and_the_Beast_theatrical_poster.jpg/revision/latest/scale-to-width-down/1032?cb=20160715084901",
+            "image": "https://static.wikia.nocookie.net/disney/images/0/0b/Beauty_and_the_Beast_theatrical_poster.jpg",
             "creation_date": "1991-11-13",
             "rating": "4.1"
         },
         {
             "title": "Lilo & Stitch",
-            "image": "https://static.wikia.nocookie.net/disney/images/c/c6/LiloandStitchmovieposter.jpg/revision/latest/scale-to-width-down/1031?cb=20191229141632",
+            "image": "https://static.wikia.nocookie.net/disney/images/c/c6/LiloandStitchmovieposter.jpg",
             "creation_date": "2002-06-21",
             "rating": "5.0"
         },
         {
             "title": "The Lion King",
-            "image": "https://static.wikia.nocookie.net/disney/images/6/63/The_lion_king_poster.jpg/revision/latest/scale-to-width-down/1030?cb=20140316165348",
+            "image": "https://static.wikia.nocookie.net/disney/images/6/63/The_lion_king_poster.jpg",
             "creation_date": "1994-06-24",
             "rating": "4.6"
         },
         {
             "title": "The Lion King II: Simba's Pride",
-            "image": "https://static.wikia.nocookie.net/disney/images/9/9b/The_Lion_King_II-Simba%27s_Pride_poster.jpg/revision/latest/scale-to-width-down/1032?cb=20181227020629",
+            "image": "https://static.wikia.nocookie.net/disney/images/9/9b/The_Lion_King_II-Simba%27s_Pride_poster.jpg",
             "creation_date": "1998-10-27",
             "rating": "3.8"
         }

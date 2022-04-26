@@ -1,4 +1,4 @@
 FROM postgres
 ENV POSTGRES_PASSWORD=123456
 ENV POSTGRES_DB=disneyDB
-ADD ./disney.sql /docker-entrypoint-initdb.d
+ADD ./d.sql /docker-entrypoint-initdb.d
