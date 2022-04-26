@@ -22,7 +22,7 @@ export const charactersGet = async (req  , res) => {
 export const charactersGetbyId= async (req  , res) => {
     // details of particular character
     res.send(
-        getDetailsCharacter(req.params.characterId)
+        await getDetailsCharacter(req.params.characterId)
     );
 }
 
@@ -65,7 +65,7 @@ const getCharacters = (searchParams) => {
         case "movie":
             return getMoviesInOrder(searchParams[filter])
         default:
-            return {msj :  "Incorrect search params"}
+            return {msg :  "Incorrect search params"}
     }
 }
 
@@ -74,12 +74,20 @@ const getDetailsCharacter = async (CharacterId) => {
 
     let chara = await db.models.Character.findOne({
         where: { ID: CharacterId },
-        include: db.models.Movie
+        attributes:{
+            exclude: ['createdAt', 'updatedAt']
+        },
+        include:[{
+            model: db.models.Movie ,
+            attributes:{
+                exclude: ['createdAt', 'updatedAt', "CharacterMovies"]
+            }} ]
     })
 
-    console.log("**********Characer movies***************** \n", chara.Movies);
-    // details of Character and characters
-    return " Character by id : " + CharacterId
+
+    console.log( "Character in DB :", chara);
+
+    return chara
 }
 
 const createCharacter = async (Character) => {

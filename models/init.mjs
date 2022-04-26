@@ -31,9 +31,9 @@ models.Character.belongsToMany(models.Movie, { through: 'CharacterMovies' });
 console.log("-----Completed Table asociations ------- ");
 
 
-
-
 await sequelize.sync();
 console.log("-----Completed INIT------- ");
+console.log(sequelize.models)
+
 export default sequelize
 
