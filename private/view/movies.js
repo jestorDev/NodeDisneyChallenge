@@ -108,30 +108,43 @@ function detailsComponent(movie) {
     return `<tr id="details-${movie.ID}" > 
         <td colspan="5" style = "text-align:  left;">   
         <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Name: ${movie.title}</h6>
-                                    </div>
-                                    <div class="card-body">
-                                    <div>Creation date:<br> ${movie.creation_date}</div>
-                                    <div>rating:<br> ${movie.rating}</div>
-                                    <div> characters :<br> <div class="row"> ${characterListComponent(movie.characters)} </div></div>
-                                    <div> genres:<br> <div class="row"> ${characterListComponent(movie.genres)}</div></div>
-                                    </div>
-                    </div>
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Name: ${movie.title}</h6>
+            </div>
+            <div class="card-body">
+            <div>Creation date:
+            <br> ${movie.creation_date.split("T")[0] }</div>
+            <div>rating:
+            <br> ${movie.rating}</div>
+            <div> characters :
+            <br> <div class="row"> ${characterListComponent(movie.Characters)} </div></div>
+            <div> genres:
+            <br> <div class="row"> ${characterListComponent(movie.Genres)}</div></div>
+            </div>
+        </div>
         </td>
         </tr>`
         
 }
 
 
+async function getMovieDetails(id){
+    let response  = await fetch("/movies/" + id )
+    return await response.json()
 
-function getDetails(id) {
+}
+
+
+async function getDetails(id) {
     console.log("Details of id : ", id);
 
-    let characterID = id.substring(8)
-    console.log(lilostich);
-    let actualRow = document.getElementById("row-" + characterID)
-    actualRow.insertAdjacentHTML("afterend", detailsComponent(lilostich))
+    let movieID = id.substring(8)
+    
+    let actualRow = document.getElementById("row-" + movieID)
+
+    let actualmovie = await getMovieDetails(movieID)
+    console.log(actualmovie);
+    actualRow.insertAdjacentHTML("afterend", detailsComponent(actualmovie))
 
 }
 
@@ -147,11 +160,20 @@ function rowMovieComponent(movie) {
     type="button" data-bs-toggle="modal"  data-bs-target="#exampleModal" 
     >
         <i class="fas fa-exclamation-triangle"></i></a></td>
-    <td><a href="#" class="btn btn-danger btn-circle btn-lg">
+    <td><a id="delete-${movie.ID}" class="btn btn-danger btn-circle btn-lg"
+    onclick=deleteMovie(this.id)>
         <i class="fas fa-trash"></i>
     </a></td>
 </tr>
 `
+}
+
+
+async function deleteMovie(id) {
+
+    await fetch("/movies/" + id.substring(7) ,{method: 'delete'})
+
+    console.log("going to delete " , id.substring(7));
 }
 
 async function getMovies() {
@@ -188,3 +210,39 @@ async function getMovies() {
     }
 }
 getMovies()
+
+
+
+
+
+
+
+function  modalCreateEventListen() {
+    let  modalForm =    document.getElementById('exampleModal')
+    modalForm.addEventListener("show.bs.modal",  
+    async (event) =>{
+        let movId = event.relatedTarget.getAttribute('id')
+        movId = movId.substring(7)
+        console.log("Going to update " , movId);
+        if (movId != "-1"){
+            //Uptaating
+            let movieData = await getMovieDetails(movId)
+            console.log("-----------MOdal update------------------");
+            document.getElementById("exampleModalLabel").textContent= "Update Movie"
+            document.getElementById("form-movie-title").value = movieData.title
+            document.getElementById("form-movie-image").value = movieData.image
+            let datedate =(new Date(movieData.creation_date).toLocaleDateString()).replaceAll("/" , "-")
+            console.log(datedate);
+            document.getElementById("form-movie-creation_date").value = datedate
+            document.getElementById("form-movie-rating").value =  movieData.rating
+            document.getElementById("form-movie-characters").value =  movieData.Characters.map(e=>e.name).toString()
+            document.getElementById("form-movie-genres").value = movieData.Genres.map(e=>e.name).toString()
+        } 
+        else{
+            document.getElementById("exampleModalLabel").textContent= "New Movie"
+        }
+    }
+    )        
+}
+
+modalCreateEventListen()

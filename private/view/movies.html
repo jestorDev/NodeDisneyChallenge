@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies</title>
-  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
   <!-- Custom fonts for this template -->
   <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="./charactrer.css" rel="stylesheet" type="text/css">
@@ -32,12 +32,13 @@
   <divf class="container">
 
     <div class="row m-2">
-      <div class="col-6">
+      <div class="col-4">
         <h1>Movies</h1>
       </div>
+
       <div class="col">
-        <a id="create--1" href="#" id="logout" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" class="btn btn-success btn-icon-split o-hidden">
+        <a id="create--1" href="#" id="logout" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          class="btn btn-success btn-icon-split o-hidden">
           <span class="icon text-white-50">
             <i class="fas fa-check"></i>
           </span>
@@ -64,6 +65,33 @@
 
     </div>
 
+    <div class="row m-2">
+      <div class="col m-2">
+        <a id="filter-name" class="btn btn-primary btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-binoculars"></i>
+          </span>
+          <span class="text">Go to /movies?name="Lilo & Stitch"</span>
+        </a>
+      </div>
+      <div class="col m-2">
+        <a id="filter-genre" class="btn btn-primary btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-binoculars"></i>
+          </span>
+          <span class="text">Go to /movies?genre="2"</span>
+        </a>
+      </div>
+      <div class="col m-2">
+        <a id="filter-order" class="btn btn-primary btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-binoculars"></i>
+          </span>
+          <span class="text"> Go to /movies?order="DESC" </span>
+        </a>
+      </div>
+
+    </div>
 
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -93,32 +121,31 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="chracter-name" class="col-form-label">Name:</label>
-                <input type="text" class="form-control" id="form-character-name">
+                <label for="chracter-title" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="form-movie-title">
               </div>
 
               <div class="mb-3">
                 <label for="chracter-image" class="col-form-label">Image:</label>
-                <input type="text" class="form-control" id="form-character-image">
+                <input type="text" class="form-control" id="form-movie-image">
               </div>
 
               <div class="mb-3">
-                <label for="chracter-age" class="col-form-label">Age:</label>
-                <input type="text" class="form-control" id="form-character-age">
+                <label for="chracter-creation_date" class="col-form-label">Creation date:</label>
+                <input type="date" class="form-control" id="form-movie-creation_date">
               </div>
               <div class="mb-3">
-                <label for="chracter-weigth" class="col-form-label">Weigth:</label>
-                <input type="text" class="form-control" id="form-character-weigth">
+                <label for="chracter-rating" class="col-form-label">Rating:</label>
+                <input type="text" class="form-control" id="form-movie-rating">
               </div>
               <div class="mb-3">
-                <label for="chracter-history" class="col-form-label">History:</label>
-                <textarea class="form-control" id="form-character-history"></textarea>
+                <label for="chracter-characters" class="col-form-label">Characters:</label>
+                <textarea class="form-control" id="form-movie-characters"></textarea>
               </div>
               <div class="mb-3">
-                <label for="chracter-movies" class="col-form-label">Movies:</label>
-                <textarea class="form-control" id="form-character-movies"></textarea>
+                <label for="chracter-genres" class="col-form-label">Genres:</label>
+                <textarea class="form-control" id="form-movie-genres"></textarea>
               </div>
-
 
 
             </form>

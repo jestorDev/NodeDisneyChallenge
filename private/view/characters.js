@@ -36,14 +36,14 @@ function rowCharacterComponent(character) {
     return `<tr id="row-${character.ID}">
     <td>${character.name}</td>
     <td><img src="${character.image}"></td>
-    <td><a id = "details-${character.ID}" href="#" class="btn btn-info btn-circle btn-lg"
+    <td><a id = "details-${character.ID}"  class="btn btn-info btn-circle btn-lg"
     onclick=getDetails(this.id)>
         <i class="fas fa-info-circle" ></i></a></td>
-    <td><a id="update-${character.ID}" href="#" class="btn btn-warning btn-circle btn-lg"
+    <td><a id="update-${character.ID}"  class="btn btn-warning btn-circle btn-lg"
     type="button" data-bs-toggle="modal"  data-bs-target="#exampleModal" 
     >
         <i class="fas fa-exclamation-triangle"></i></a></td>
-    <td><a href="#" class="btn btn-danger btn-circle btn-lg">
+    <td><a  class="btn btn-danger btn-circle btn-lg">
         <i class="fas fa-trash"></i>
     </a></td>
 </tr>
@@ -173,7 +173,8 @@ function movieCardComponent(movie) {
 async function  getCharacterDetails(id) {
     let charuri = '/characters/' + id.toString()
     console.log("Getiitng -----------" , charuri);
-    return await fetch(charuri);       
+    let response =  await fetch(charuri)
+    return await response.json();       
 }
 
 
@@ -183,22 +184,22 @@ async function  getDetails(id) {
     let characterID  = id.substring(8)
     let actualRow=  document.getElementById("row-"+characterID)
 
-    let actualDetails =await (await getCharacterDetails(characterID)).json()
+    let actualDetails = await getCharacterDetails(characterID)
     console.log( "Details -------------------------", actualDetails);
     actualRow.insertAdjacentHTML( "afterend",  detailsComponent(actualDetails))
 }
 
 
-function modalCreateEventListen(params) {
+function  modalCreateEventListen() {
     let  modalForm =    document.getElementById('exampleModal')
     modalForm.addEventListener("show.bs.modal",  
-    (event) =>{
+    async (event) =>{
         let charId = event.relatedTarget.getAttribute('id')
         charId = charId.substring(7)
         console.log("Going to update " , charId);
         if (charId != "-1"){
             //Uptaating
-            let characterData = simba
+            let characterData = await getCharacterDetails(charId)
             console.log("-----------MOdal update------------------");
             document.getElementById("exampleModalLabel").textContent= "Update character"
             document.getElementById("form-character-name").value = characterData.name
@@ -212,23 +213,7 @@ function modalCreateEventListen(params) {
             document.getElementById("exampleModalLabel").textContent= "New Character"
         }
     }
-    )
-
-//          // Button that triggered the modal
-//          let button = event.relatedTarget
-//          // Extract info from data-bs-* attributes
-//          let recipient = button.getAttribute('data-bs-whatever')
-//          // If necessary, you could initiate an AJAX request here
-//          // and then do the updating in a callback.
-//          //
-//          // Update the modal's content.
-//          let modalTitle = exampleModal.querySelector('.modal-title')
-//          let modalBodyInput = exampleModal.querySelector('.modal-body input')
-//        
-//          modalTitle.textContent = 'New message to ' + recipient
-//          modalBodyInput.value = recipient
-    
-        
+    )        
 }
 
 
