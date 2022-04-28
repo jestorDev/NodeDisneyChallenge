@@ -5,28 +5,29 @@ import db from "../models/init.mjs";
 
 
 
-export const moviesGet =  async (req, res) => {
+export const moviesGet = async (req, res) => {
     res.send(await getMovies(req.query));
 }
 
-export const moviesGetbyId =  async (req, res) => {
+export const moviesGetbyId = async (req, res) => {
     res.send(await getDetailsMovie(req.params.movieId));
 }
 
-export const moviesPostCreate = async(req, res) => {
+export const moviesPostCreate = async (req, res) => {
     //Create 
-    res.send( await createMovie(req.body));
+    res.send(await createMovie(req.body));
 }
 
 
-export const moviesPutUpdate= async(req, res) => {
+export const moviesPutUpdate = async (req, res) => {
     //Update movie
-    res.send( await updateMovie(req.params.movieId ,req.body));
+    res.send(await updateMovie(req.params.movieId, req.body));
 }
 
-export const moviesDelete =async(req, res) => {
+export const moviesDelete = async (req, res) => {
     //Delete movie
-    res.send( await deleteMovie(req.params.movieId ))
+    console.log("Delete --------------- " , req.params.movieId);
+    res.send(await deleteMovie(req.params.movieId))
 }
 
 
@@ -65,7 +66,7 @@ export const getMovies = (searchParams) => {
 
     if (Object.keys(searchParams).length === 0) {
         return db.models.Movie.findAll({
-            attributes: [ 'ID', 'image', 'title', "createdAt"],
+            attributes: ['ID', 'image', 'title', "createdAt"],
         });
     }
 
@@ -84,9 +85,32 @@ export const getMovies = (searchParams) => {
 }
 
 
-export const getDetailsMovie = (movieId) => {
+export const getDetailsMovie = async (movieId) => {
     // details of movie and characters
-    return " Movie by id : " + movieId
+    let mov = await db.models.Movie.findOne({
+        where: { ID: movieId },
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
+        },
+        include: [{
+            model: db.models.Character,
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', "CharacterMovies"]
+            }
+        },
+        {
+            model: db.models.Genre,
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        }
+        ]
+    })
+
+
+    console.log("Movie in DB :", mov);
+
+    return mov
 }
 
 export const createMovie = async (movie) => {
@@ -113,8 +137,8 @@ export const createMovie = async (movie) => {
         movie.genres.forEach(genreID => {
             db.models.MovieGenres.create(
                 {
-                    "MovieID" : newMovie.ID,
-                    "GenreID" : genreID
+                    "MovieID": newMovie.ID,
+                    "GenreID": genreID
                 },
             )
         });
@@ -132,6 +156,9 @@ export const updateMovie = async (id, movie) => {
 
     return "+++++++++UPDating++++++++++ " + id + " +++++++++++" + JSON.stringify(movie)
 }
-export const deleteMovie = (id) => {
-    return " Delete movie with id  :" + id;
+export const deleteMovie = async (id) => {
+
+    const actual = await db.models.Movie.findOne({ where: { ID: id } })
+    await actual.destroy();
+    return {msg : "Deleted movie"}
 }
