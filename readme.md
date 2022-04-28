@@ -22,7 +22,7 @@
 | Requeriment  | Status |
 | ------------- | ------------- |
 | Database Modeling  | ✅ |
-| User authentication   | ✅  |
+| User authentication   | 🚧 TODO:Secure token |
 | User authentication   | ✅  |
 | Characters list   | ✅  |
 | Characters CRUD  | 🚧 TODO:Update|
@@ -35,9 +35,15 @@
 | Welcome Email  | ❌ |
 | Postman documentation  | ❌ |
 | Tests  | ❌ |
-| ------------- | ------------- |
+| Extras | ------------- |
 | Frontend  | ✅ |
-| Deploy  | ❌ |
+| DockerHub container | ❌ |
+| Deploy | ❌ |
 
+
+## Views 
+
+![/view/character](screenshots/characters.png?raw=true "Characters list")
+![/view/movies](screenshots/movies.png?raw=true "Movies list")
 
 
