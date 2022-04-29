@@ -35,7 +35,7 @@
 | Welcome Email  | ❌ |
 | Postman documentation  | ❌ |
 | Tests  | ❌ |
-| Extras | ------------- |
+| Extras |
 | Frontend  | ✅ |
 | DockerHub container | ❌ |
 | Deploy | ❌ |

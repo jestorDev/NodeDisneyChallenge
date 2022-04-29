@@ -1,27 +1,5 @@
+import { fetcher } from "./utlis.mjs";
 
-
-const simba={
-    "ID" : 2,
-    "name": "Simba",
-    "image": "https://static.wikia.nocookie.net/disney/images/3/37/Profile_-_Simba.jpeg",
-    "age": 18,
-    "weitgh": 200,
-    "history": " Simba is the proptagonist of Disney's 1994 animated feature film, The Lion King. He is the son of Mufasa and Sarabi, who was destined to rule the Pride Lands, as king. When Mufasa was murdered by his treacherous brother, Scar, Simba was exiled from the Pride Lands after his uncle tricked him into taking the blame for his father's death. He finds refuge in a jungle oasis with Timon and Pumbaa who raise him as his adoptive fathers, but when the Pride Lands fall to disarray during his absence. With the kingdom in peril, Simba is forced to confront his troubled past and take his place in the \"Circle of Life\". ",
-    "movies":[
-        {
-            "title": "The Lion King",
-            "image": "https://static.wikia.nocookie.net/disney/images/6/63/The_lion_king_poster.jpg",
-            "creation_date": "1994-06-24",
-            "rating": "4.6"
-        },
-        {
-            "title": "The Lion King II: Simba's Pride",
-            "image": "https://static.wikia.nocookie.net/disney/images/9/9b/The_Lion_King_II-Simba%27s_Pride_poster.jpg",
-            "creation_date": "1998-10-27",
-            "rating": "3.8"
-        }
-    ]
-}
 
 function logoutBtn(params) {
     let btn  = document.getElementById("logout")
@@ -88,7 +66,7 @@ async function getCharacters() {
         return
     }
     
-    let response = await fetch('/characters');
+    let response = await fetcher('/characters');
     console.log(response.status); // 200
     console.log(response.statusText); // OK
 
@@ -99,9 +77,7 @@ async function getCharacters() {
         let table = ""
         characters.forEach(character=> {            
             table +=rowCharacterComponent(character);
-        });
-        
-        respo = characters
+        });        
         list.innerHTML = table
     }
 }
@@ -173,7 +149,7 @@ function movieCardComponent(movie) {
 async function  getCharacterDetails(id) {
     let charuri = '/characters/' + id.toString()
     console.log("Getiitng -----------" , charuri);
-    let response =  await fetch(charuri)
+    let response =  await fetcher(charuri)
     return await response.json();       
 }
 
@@ -188,6 +164,10 @@ async function  getDetails(id) {
     console.log( "Details -------------------------", actualDetails);
     actualRow.insertAdjacentHTML( "afterend",  detailsComponent(actualDetails))
 }
+window.getDetails = getDetails;
+window.updatecharacter = updatecharacter;
+window.htmlToElement = htmlToElement;
+
 
 
 function  modalCreateEventListen() {

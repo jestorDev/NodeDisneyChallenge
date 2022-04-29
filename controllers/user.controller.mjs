@@ -1,8 +1,17 @@
 
 import db from "../models/init.mjs";
 
-function generateToken() {
-    return (Math.random()*100000000000).toString()
+import jwt from 'jsonwebtoken';
+
+const { sign, verify } = jwt;
+
+
+function generateToken(email) {
+    console.log( "Env  : ", process.env.JWT_KEY);
+    let secret = process.env.JWT_KEY || "1239YvkO9rZv5cnDif8qigoD9PxOmq2iemG"
+    console.log( "Jwt Secret ----------------------" , secret);
+    const tokenLogin = sign({"email":email}, secret , {expiresIn: "2h"})
+    return tokenLogin
 }
 
 export const loginPostAccess = async (req, res) => {
@@ -21,7 +30,7 @@ export const loginPostAccess = async (req, res) => {
     console.log("Found in db:", resgisteredUser);
 
     if (resgisteredUser && resgisteredUser.password == oldUser.password)
-        res.status(200).send({ msg: "Correct Login", "token": generateToken()  })
+        res.status(200).send({ msg: "Correct Login", "token": generateToken(oldUser.email)})
     else
         res.status(400).send({ msg: "Incorrect user or password" })
 }
