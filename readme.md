@@ -1,6 +1,6 @@
 # CHALLENGE BACKEND - NodeJs
-## Objective
-
+## Description
+Let explore the disney world with this example API created with node, express, sequelize, postgress and a vanilla js frontend using bootstrap Sbadmin2 components.
 ## Installation
 
 1. Download database
