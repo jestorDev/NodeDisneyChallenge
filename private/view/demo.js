@@ -14,7 +14,7 @@ document.getElementById("title").innerHTML = queryString
 let  getQuery = async (document)=> {
     let response = await fetcher(queryString.substring(1));    
     let list  = await  response.json()
-    document.getElementById("content").innerHTML =  JSON.stringify(list, null, 2);
+    document.getElementById("content").innerHTML =   prettyPrintJson.toHtml(list);
 }
 
 getQuery(document)
