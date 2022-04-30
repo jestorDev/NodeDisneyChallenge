@@ -40,23 +40,31 @@ let getMovieByName = (name) => {
     });
 }
 
-let getMovieByGenre = (genre) => {
-    return db.models.Movie.findAll({
-        where: { title: genre }
-    });
+let getMovieByGenre = async (genreId) => {
+    const foundMovies = await  db.models.Movie.findAll({
+        attributes: ['ID', 'image', 'title', "creation_date"],
+        include: [{
+            model: db.models.Genre,
+            where: { ID: genreId } //
+        }]
+
+    })
+    return foundMovies;
 }
 
 let getMoviesInOrder = (order) => {
     if (order === "DESC")
         return db.models.Movie.findAll({
             order: [
-                ['ID', 'DESC'],
-            ]
+                ['creation_date', 'DESC'],
+            ],
+            attributes: ['ID', 'image', 'title', "creation_date"],
         });
     return db.models.Movie.findAll({
         order: [
-            ['ID', 'ASC'],
-        ]
+            ['creation_date', 'ASC'],
+        ],
+        attributes: ['ID', 'image', 'title', "creation_date"],
     });
 }
 
@@ -73,6 +81,7 @@ export const getMovies = (searchParams) => {
     let filter = Object.keys(searchParams)[0]
     switch (filter) {
         case "name":
+            console.log("maneeeeeeeeeeeeeee");
             return getMovieByName(searchParams[filter])
         case "genre":
             return getMovieByGenre(searchParams[filter])
