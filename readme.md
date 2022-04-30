@@ -4,23 +4,17 @@
 ## Installation
 
 1. Download database
-
    ```sh
    docker run --name database -p 5432:5432 -d jtorrejonl/disney_db
    ```
-
-1. Clone the repo
+3. Clone, Install packages and launch
    ```sh
    git clone https://github.com/jestorDev/NodeDisneyChallenge.git
-   ```
-2. Install NPM packages
-   ```sh
    npm install
-   ```
-3. Start
-   ```sh
    npm start
    ```
+4. Go to http://localhost:3000/
+   
 
 
 ## Requeriments
@@ -31,19 +25,19 @@
 | User authentication   | ✅ |
 | User authentication   | ✅  |
 | Characters list   | ✅  |
-| Characters CRUD  | 🚧 TODO:Update|
+| Characters CRUD  | 🚧 TODO:Create,Update|
 | Characters Details   | ✅ |
 | Characters Search params   | ✅ |
 | Movies list   | ✅  |
 | Movies Details   | ✅ |
-| Movies CRUD   | 🚧 TODO:Update |
+| Movies CRUD   | 🚧 TODO:Create,Update |
 | Movies Search params | ✅ |
 | Welcome Email | ❌ |
 | Postman documentation  | ❌ |
 | Tests  | ❌ |
 | Extras |
 | Frontend  | ✅ |
-| DockerHub container | ❌ |
+| Database container | ✅ |
 | Deploy | ❌ |
 
 

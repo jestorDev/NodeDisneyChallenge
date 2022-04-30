@@ -210,4 +210,7 @@ function modalCreateEventListen() {
     )
 }
 
+window.deleteMovie = deleteMovie;
+window.getDetails = getDetails;
+
 modalCreateEventListen()
