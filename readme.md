@@ -22,15 +22,14 @@
 | Requeriment  | Status |
 | ------------- | ------------- |
 | Database Modeling  | ✅ |
-| User authentication   | ✅ |
-| User authentication   | ✅  |
+| User authentication JWT   | ✅ |
 | Characters list   | ✅  |
-| Characters CRUD  | 🚧 TODO:Create,Update|
+| Characters CRUD  | 🚧 TODO:Create,Update form|
 | Characters Details   | ✅ |
 | Characters Search params   | ✅ |
 | Movies list   | ✅  |
 | Movies Details   | ✅ |
-| Movies CRUD   | 🚧 TODO:Create,Update |
+| Movies CRUD   | 🚧 TODO:Create,Update form|
 | Movies Search params | ✅ |
 | Welcome Email | ❌ |
 | Postman documentation  | ❌ |
