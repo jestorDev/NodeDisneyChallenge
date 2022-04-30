@@ -11,12 +11,10 @@ export default function verify (req, res, next){
     }
     console.log("Token: "  , token);
     if (!token) {
-        next()
         console.log("Access denied");
         return res.status(401).json({ error: 'Access denied' })
     }
     try {
-
         const verified = jwt.verify(token, process.env.JWT_KEY)
         req.user = verified
         console.log("Access granted");
@@ -24,8 +22,6 @@ export default function verify (req, res, next){
     } catch (error) {
         res.status(400).json({error: 'Invalid token'})
     }
-
-    next()
 }
 
 
