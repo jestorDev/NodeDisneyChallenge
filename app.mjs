@@ -22,21 +22,12 @@ app.set("port"  , 3000)
 
 app.use(express.json());
 
-
-
-
-
-
-
-
 app.use(express.static(path.join(__dirname, 'public'),{extensions:['html']}));
 app.use( express.static( path.join( __dirname, 'private' ),{extensions:['html']} ) );
 
 app.use(authRouter)
 app.use(verify ,characterRouter)
 app.use(verify ,moviesRouter)
-
-
 
 export default app
 
